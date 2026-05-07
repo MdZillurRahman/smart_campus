@@ -54,3 +54,56 @@ build-iPhoneSimulator/
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
+
+# ── macOS ─────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Editor ────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ══ SERVER (Rails) ════════════════════════════════
+
+# Environment & Secrets
+server/.env
+server/.env.*
+server/config/master.key
+server/config/credentials/*.key
+
+# Dependencies
+server/vendor/bundle
+
+# Logs & Temp
+server/log/*.log
+server/tmp/
+server/storage/
+
+# Rails specific
+server/.byebug_history
+
+# Deployment tools we don't use
+server/.kamal/
+server/Dockerfile
+server/.dockerignore
+server/.github/
+
+# ══ CLIENT (React/Vite) ═══════════════════════════
+
+# Environment
+client/.env
+client/.env.*
+client/.env.production
+
+# Dependencies
+client/node_modules/
+
+# Build output
+client/dist/
+
+# ── Misc ──────────────────────────────────────────
+*.log
+.bundle/
