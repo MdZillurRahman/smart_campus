@@ -97,6 +97,11 @@ smartcampus/                   ← single GitHub repo
 
 Indexes: `username`, `role`
 
+> **Superadmin:** The first admin account, seeded directly. Identified by
+> `username = "superadmin"` and `role = "admin"`. Has elevated privileges
+> enforced at the application level — not a separate database role.
+> Never registerable through the UI.
+
 ### `complaints` table
 
 | Column          | Type         | Constraints                                              |

@@ -106,15 +106,21 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 
 ## Role Permission Matrix
 
-| Action                   | Student | Admin | Staff |
-|--------------------------|:-------:|:-----:|:-----:|
-| Submit complaint          | ✅      | ❌    | ❌    |
-| View own complaints       | ✅      | ❌    | ❌    |
-| View all complaints       | ❌      | ✅    | ❌    |
-| View assigned complaints  | ❌      | ❌    | ✅    |
-| Assign complaint          | ❌      | ✅    | ❌    |
-| Resolve complaint         | ❌      | ✅    | ✅*   |
-| Reopen complaint          | ❌      | ✅    | ❌    |
-| Manage users              | ❌      | ✅    | ❌    |
+| Action                          | Student | Admin | Superadmin |  Staff |
+|---------------------------------|:-------:|:-----:|:----------:|:------:|
+| Submit complaint                | ✅      | ❌    | ❌         | ❌     |
+| View own complaints             | ✅      | ❌    | ❌         | ❌     |
+| View all complaints             | ❌      | ✅    | ✅         | ❌     |
+| View assigned complaints        | ❌      | ❌    | ❌         | ✅     |
+| Assign complaint                | ❌      | ✅    | ✅         | ❌     |
+| Resolve complaint               | ❌      | ✅    | ✅         | ✅*    |
+| Reopen complaint                | ❌      | ✅    | ✅         | ❌     |
+| Approve staff registrations     | ❌      | ✅    | ✅         | ❌     |
+| Approve admin registrations     | ❌      | ❌    | ✅         | ❌     |
+| Create/deactivate admin account | ❌      | ❌    | ✅         | ❌     |
+| Deactivate any user             | ❌      | ❌    | ✅         | ❌     |
+
+> *Staff can only resolve complaints where `assigned_to_id = current_user.id`
+> **Superadmin is `role = "admin"` with `username = "superadmin"` — not a separate DB role**
 
 > *Staff can only resolve complaints where `assigned_to_id = current_user.id`

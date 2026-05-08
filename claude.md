@@ -50,6 +50,18 @@ Local path: `smart_campus/` (based on terminal prompt observed)
 
 ---
 
+## Superadmin
+
+- Not a 4th role — stored as `role = "admin"` in the database
+- Identified in code by: `role == "admin" && username == "superadmin"`
+- Seeded directly in `db/seeds.rb` — never registerable through the UI
+- Extra powers over regular admin:
+  - Can approve admin-role registrations (admin can only approve staff)
+  - Can create and deactivate admin accounts
+  - Can deactivate any user in the system
+- Enforced at application level via `current_user.superadmin?` helper in User model
+- Credentials in seeds: username `superadmin`, password `super123`
+
 ## Data Models (Quick Reference)
 
 **users:** id, username, email, password_digest, role, fullname, created_at, updated_at
