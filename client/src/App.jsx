@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import StudentDashboard from './pages/StudentDashboard'
 import SubmitComplaint from './pages/SubmitComplaint'
 import MyComplaints from './pages/MyComplaints'
+import HomePage from './pages/HomePage'
 
 const queryClient = new QueryClient()
 
@@ -18,6 +19,7 @@ export default function App() {
       <BrowserRouter>
         <AuthProvider>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
 
             <Route path="/student/dashboard" element={
