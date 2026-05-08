@@ -3,13 +3,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AuthProvider } from './context/AuthContext'
 import PrivateRoute from './components/PrivateRoute'
 import Login from './pages/Login'
+import StudentDashboard from './pages/StudentDashboard'
+import SubmitComplaint from './pages/SubmitComplaint'
+import MyComplaints from './pages/MyComplaints'
 
 const queryClient = new QueryClient()
 
-// Placeholder pages — we'll build these in Phase 2B/2C
-const StudentDashboard = () => <div className="p-8">Student Dashboard (coming soon)</div>
-const AdminDashboard   = () => <div className="p-8">Admin Dashboard (coming soon)</div>
-const StaffDashboard   = () => <div className="p-8">Staff Dashboard (coming soon)</div>
+const AdminDashboard = () => <div className="p-8">Admin Dashboard (coming soon)</div>
+const StaffDashboard = () => <div className="p-8">Staff Dashboard (coming soon)</div>
 
 export default function App() {
   return (
@@ -24,20 +25,28 @@ export default function App() {
                 <StudentDashboard />
               </PrivateRoute>
             } />
+            <Route path="/student/submit" element={
+              <PrivateRoute allowedRoles={['student']}>
+                <SubmitComplaint />
+              </PrivateRoute>
+            } />
+            <Route path="/student/complaints" element={
+              <PrivateRoute allowedRoles={['student']}>
+                <MyComplaints />
+              </PrivateRoute>
+            } />
 
             <Route path="/admin/dashboard" element={
               <PrivateRoute allowedRoles={['admin']}>
                 <AdminDashboard />
               </PrivateRoute>
             } />
-
             <Route path="/staff/dashboard" element={
               <PrivateRoute allowedRoles={['staff']}>
                 <StaffDashboard />
               </PrivateRoute>
             } />
 
-            {/* Catch-all → login */}
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </AuthProvider>

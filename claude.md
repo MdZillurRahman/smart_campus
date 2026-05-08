@@ -186,6 +186,28 @@ GET    /api/v1/users?role=staff    (admin)
 - Build StatusBadge and PriorityBadge components
 - Build ComplaintRow with expandable detail
 
+**Active Phase:** Phase 2C — Admin + Staff Views
+
+**What was completed last session:**
+- Built StatusBadge and PriorityBadge components
+- Built ComplaintRow with expandable detail
+- Built resolutionTime util
+- Built useComplaints hook with jsonapi-serializer normalization fix
+- Built StudentDashboard with stat cards and recent complaints
+- Built SubmitComplaint form with Zod validation
+- Built MyComplaints with status/category filters
+- Updated App.jsx with all student routes
+- Tested all student flows end to end — working
+
+**What to do next session:**
+- Build AdminDashboard with all complaints + stat cards
+- Build AssignModal (staff dropdown)
+- Build ResolveModal (resolution note)
+- Build reopen confirmation
+- Build StaffDashboard with assigned task cards
+- Build TaskCard with priority colour stripe
+- Wire staff resolve modal
+
 ---
 
 ## My Role in This Project
