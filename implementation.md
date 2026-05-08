@@ -18,9 +18,9 @@
 
 | Phase | Focus                        | Duration  | Status      |
 |-------|------------------------------|-----------|-------------|
-| 1A    | Rails API setup + DB + Auth  | Days 1–4  | Not started |
-| 1B    | Complaints API               | Days 5–7  | Not started |
-| 2A    | React setup + Auth UI        | Days 8–10 | Not started |
+| 1A    | Rails API setup + DB + Auth  | Days 1–4  | ✅ Done     |
+| 1B    | Complaints API               | Days 5–7  | ✅ Done     |
+| 2A    | React setup + Auth UI        | Days 8–10 | 🔄 Next     |
 | 2B    | Student views                | Days 11–13| Not started |
 | 2C    | Admin + Staff views          | Days 14–16| Not started |
 | 3     | Integration + Polish         | Days 17–18| Not started |

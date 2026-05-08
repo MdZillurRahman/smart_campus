@@ -120,6 +120,30 @@ GET    /api/v1/users?role=staff    (admin)
 
 > ⚠️ UPDATE THIS SECTION AT THE END OF EVERY SESSION
 
+**Active Phase:** Phase 2A — React Setup + Auth UI
+**What was completed last session:**
+- Scaffolded Rails API inside `server/`
+- Configured PostgreSQL, CORS, environment variables
+- Wrote and ran all migrations (users + complaints + add_status_to_users)
+- Built User and Complaint models with validations and scopes
+- Built ApplicationController with JWT auth (authenticate_user!, require_role!)
+- Built AuthController (login)
+- Built RegistrationsController (hybrid approval — students auto-approved, staff/admin pending)
+- Built ComplaintsController (index, show, create, assign, resolve, reopen)
+- Built UsersController (index, pending, approve, reject)
+- Built UserSerializer and ComplaintSerializer
+- Seeded database with superadmin, staff1, student1, student2 + 5 complaints
+- Tested all endpoints in Postman — all passing
+- Merged feature/rails-setup → dev → staging
+
+**What to do next session:**
+- Start Phase 2A — scaffold React + Vite inside `client/`
+- Install and configure Tailwind CSS + shadcn/ui
+- Set up Axios client with JWT interceptor
+- Build AuthContext and PrivateRoute
+- Build Login page
+- Build Registration page with role selector
+
 **Active Phase:** Phase 1A — Rails API Setup
 **What was completed last session:**
 - Created GitHub monorepo (`smart_campus`)
