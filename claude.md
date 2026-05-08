@@ -166,6 +166,26 @@ GET    /api/v1/users?role=staff    (admin)
 - Configure PostgreSQL
 - Add gems and run first migration
 
+**Active Phase:** Phase 2B — Student Views
+
+**What was completed last session:**
+- Scaffolded React + Vite inside client/
+- Installed all dependencies (Axios, React Query, React Router, RHF, Zod)
+- Configured Tailwind CSS v4 and shadcn/ui
+- Set up Axios client with JWT interceptor (src/api/client.js)
+- Built AuthContext with login, logout, localStorage persistence
+- Built PrivateRoute with role-based protection
+- Built Login page with Zod validation and error handling
+- Set up all routes in App.jsx with placeholder dashboards
+- Tested login → correct redirect for all 3 roles (superadmin, student1, staff1)
+
+**What to do next session:**
+- Build StudentDashboard (stat cards + recent complaints)
+- Build SubmitComplaint page
+- Build MyComplaints page with filters
+- Build StatusBadge and PriorityBadge components
+- Build ComplaintRow with expandable detail
+
 ---
 
 ## My Role in This Project
