@@ -1,13 +1,14 @@
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { login } from '../api/auth'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, ShieldCheck } from 'lucide-react'
+import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
+import { login } from '../api/auth';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, ShieldCheck } from 'lucide-react';
 
 const schema = z.object({
   username: z.string().min(1, 'Username is required'),
@@ -33,6 +34,9 @@ export default function Login() {
       setServerError(msg)
     }
   }
+
+  const [searchParams] = useSearchParams();
+  const sessionExpired = searchParams.get('expired') === 'true';
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2 bg-slate-50">
@@ -86,6 +90,12 @@ export default function Login() {
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">Welcome back</h2>
             <p className="text-sm text-slate-500">Sign in to continue to your dashboard.</p>
           </div>
+
+          {sessionExpired && (
+            <div className="mb-4 my-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded p-3">
+              Your session has expired. Please sign in again.
+            </div>
+          )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-5">
             <div className="space-y-2">
