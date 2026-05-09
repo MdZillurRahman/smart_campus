@@ -122,12 +122,12 @@ export default function Register() {
         <div className="absolute -bottom-32 -left-20 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
 
         <div className="relative z-10 flex items-center gap-3">
-          <div className="w-11 h-11 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center">
-            <GraduationCap className="w-6 h-6" />
-          </div>
-          <span className="text-xl font-semibold tracking-tight">
-            SmartCampus
-          </span>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white">
+              <GraduationCap className="h-5 w-5" />
+            </div>
+            <span className="text-lg font-semibold tracking-tight">SmartCampus</span>
+          </Link>
         </div>
 
         <div className="relative z-10 space-y-6 max-w-md">

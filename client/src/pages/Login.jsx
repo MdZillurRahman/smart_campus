@@ -46,13 +46,12 @@ export default function Login() {
         <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-indigo-500/20 blur-3xl" />
 
         <div className="relative flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm ring-1 ring-white/20">
-            <GraduationCap className="h-6 w-6" />
-          </div>
-          <div>
-            <p className="text-lg font-semibold tracking-tight">SmartCampus</p>
-            <p className="text-xs text-white/60">Complaint & Issue Tracking</p>
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white">
+              <GraduationCap className="h-5 w-5" />
+            </div>
+            <span className="text-lg font-semibold tracking-tight">SmartCampus</span>
+          </Link>
         </div>
 
         <div className="relative space-y-6">

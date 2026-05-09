@@ -88,12 +88,19 @@ export default function HomePage() {
             <a href="#categories" className="hover:text-slate-900">Categories</a>
           </nav>
 
-          <Link to="/login">
-            <Button className="h-9 bg-slate-900 hover:bg-slate-800">
-              Sign in
-              <ArrowRight className="ml-1.5 h-4 w-4" />
-            </Button>
-          </Link>
+          <div className='buttons'>
+            <Link to="/register" className='mr-2'>
+              <Button variant="outline" className="h-9">
+                Register
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button className="h-9 bg-slate-900 hover:bg-slate-800">
+                Sign in
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -287,13 +294,19 @@ export default function HomePage() {
             <p className="mx-auto mt-4 text-white text-center">
               Sign in with your role and start managing issues the smart way.
             </p>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-center flex-col">
               <Link to="/login">
                 <Button size="lg" className="h-12 bg-white px-8 text-slate-900 hover:bg-slate-100 cursor-pointer">
                   Sign in to SmartCampus
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
+              <p className="!mt-2 text-sm text-white/60">
+                No account?{' '}
+                <Link to="/register" className="text-white underline underline-offset-2 hover:text-white/80">
+                  Register here
+                </Link>
+              </p>
             </div>
           </div>
         </div>
