@@ -208,6 +208,24 @@ GET    /api/v1/users?role=staff    (admin)
 - Build TaskCard with priority colour stripe
 - Wire staff resolve modal
 
+**Active Phase:** Phase 3 — Integration + Polish
+
+**What was completed last session:**
+- Built AssignModal with staff dropdown
+- Built ResolveModal with resolution note
+- Built AdminDashboard with stat cards, filters, assign/resolve/reopen
+- Built StaffDashboard with TaskCard and priority colour stripe
+- Wired all mutations with React Query cache invalidation
+- Tested full complaint lifecycle as superadmin and staff1 — all working
+- PostgreSQL 18 (brew services start postgresql@18)
+
+**What to do next session:**
+- Global expired JWT handling (auto-logout + redirect)
+- Mobile responsiveness pass
+- Build Landing page
+- UI polish pass
+- Then move to Phase 4 — Deployment
+
 ---
 
 ## My Role in This Project
