@@ -20,7 +20,7 @@ This is a **rebuild** of an existing PHP/HTML/CSS app using a modern full stack.
 |-----------|---------------------------------------|
 | Frontend  | React 19 + Vite + Tailwind + shadcn/ui |
 | Backend   | Ruby on Rails 8.1.2 (API mode)        |
-| Database  | PostgreSQL                            |
+| Database  | PostgreSQL 18 (start with: brew services start postgresql@18)                            |
 | Auth      | JWT (manual, no Devise)               |
 | Hosting   | Render (API + DB) + Netlify (React)   |
 
@@ -163,7 +163,7 @@ GET    /api/v1/users?role=staff    (admin)
 
 **What to do next session:**
 - Scaffold Rails API app inside `server/` folder
-- Configure PostgreSQL
+- Configure PostgreSQL 18 (start with: brew services start postgresql@18)
 - Add gems and run first migration
 
 **Active Phase:** Phase 2B — Student Views

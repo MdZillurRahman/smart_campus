@@ -1,17 +1,16 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AuthProvider } from './context/AuthContext'
-import PrivateRoute from './components/PrivateRoute'
-import Login from './pages/Login'
-import StudentDashboard from './pages/StudentDashboard'
-import SubmitComplaint from './pages/SubmitComplaint'
-import MyComplaints from './pages/MyComplaints'
-import HomePage from './pages/HomePage'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './components/PrivateRoute';
+import Login from './pages/Login';
+import StudentDashboard from './pages/StudentDashboard';
+import SubmitComplaint from './pages/SubmitComplaint';
+import MyComplaints from './pages/MyComplaints';
+import HomePage from './pages/HomePage';
+import AdminDashboard from './pages/AdminDashboard';
+import StaffDashboard from './pages/StaffDashboard';
 
-const queryClient = new QueryClient()
-
-const AdminDashboard = () => <div className="p-8">Admin Dashboard (coming soon)</div>
-const StaffDashboard = () => <div className="p-8">Staff Dashboard (coming soon)</div>
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
