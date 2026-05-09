@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
@@ -8,7 +8,7 @@ import { login } from '../api/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, ShieldCheck } from 'lucide-react';
+import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const schema = z.object({
   username: z.string().min(1, 'Username is required'),
@@ -56,7 +56,7 @@ export default function Login() {
         </div>
 
         <div className="relative space-y-6">
-          <h1 className="text-4xl font-bold leading-tight tracking-tight">
+          <h1 className="text-4xl font-bold leading-tight tracking-tight !text-white">
             Report it. Track it.<br />
             <span className="text-blue-300">Get it resolved.</span>
           </h1>
@@ -64,9 +64,19 @@ export default function Login() {
             A unified platform for students, staff, and administrators to manage campus
             issues from submission to resolution.
           </p>
-          <div className="flex items-center gap-2 text-sm text-white/60">
-            <ShieldCheck className="h-4 w-4 text-blue-300" />
-            <span>Secure role-based access</span>
+          <div className="flex items-center gap-2 text-sm text-white/60 my-4">
+            <ul className="space-y-3 text-sm text-white/80">
+            {[
+              'Role-based access for students, staff & admins',
+              'Real-time complaint tracking',
+              'Secure & private by design',
+            ].map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                {t}
+              </li>
+            ))}
+          </ul>
           </div>
         </div>
 
@@ -154,6 +164,11 @@ export default function Login() {
               {isSubmitting ? 'Signing in…' : 'Sign in'}
             </Button>
           </form>
+
+          <p className="text-center text-sm text-slate-500 !my-4">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-blue-600 hover:underline">Create one</Link>
+          </p>
 
           <div className="mt-8 rounded-xl border border-slate-200 bg-white p-4">
             <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">
