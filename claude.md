@@ -226,6 +226,31 @@ GET    /api/v1/users?role=staff    (admin)
 - UI polish pass
 - Then move to Phase 4 — Deployment
 
+**Active Phase:** Phase 4 — Deployment
+
+**What was completed last session:**
+- Built global JWT expiry handling (axios response interceptor + ?expired=true redirect)
+- Built Registration page with role selector and Zod validation
+- Student → auto login on registration
+- Staff/Admin → pending approval screen on registration
+- Fixed duplicate username/email error display (errors array vs error string)
+- Built Landing page (hero, roles, features, how it works, categories, CTA, footer)
+- Added Register button to landing page navbar and CTA section
+- Mobile responsiveness handled via Tailwind responsive prefixes
+- Merged feature/phase3-integration → dev → main
+
+**What to do next session:**
+- Deploy Rails API to Render
+- Deploy React app to Netlify
+- Seed production database
+- End-to-end test on live URLs
+- Build pending approvals UI for admin/superadmin
+
+**Known gap:**
+- Pending approval management UI not yet built
+- Admin needs a page to approve/reject pending staff registrations
+- Superadmin needs a page to approve/reject pending admin registrations
+
 ---
 
 ## My Role in This Project

@@ -61,6 +61,9 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [ ] Admin can view all users
 - [ ] Admin can add new staff accounts
 - [ ] Admin can deactivate a user account
+- [ ] Admin can view and approve pending staff registrations
+- [ ] Superadmin can view and approve pending admin registrations
+- [ ] Reject pending registrations with feedback
 
 ### Notifications (Email)
 - [ ] Email sent to student when complaint is assigned
