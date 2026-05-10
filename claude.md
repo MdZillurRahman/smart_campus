@@ -251,6 +251,23 @@ GET    /api/v1/users?role=staff    (admin)
 - Admin needs a page to approve/reject pending staff registrations
 - Superadmin needs a page to approve/reject pending admin registrations
 
+**Active Phase:** Complete — Post-launch polish
+
+**What was completed last session:**
+- Deployed Rails API to Render
+- Deployed React app to Netlify
+- Fixed production.rb for API mode (removed active_storage, solid_cache, solid_queue)
+- Fixed start command on Render
+- Seeded production database via build command
+- Built pending approvals page (admin sees staff, superadmin sees all)
+- Approve and reject with React Query cache invalidation
+- Merged all features → dev → staging → main
+
+**What to do next session:**
+- Build registration approval notification (tell user they're approved via email) — Phase 2
+- Analytics dashboard — Phase 3
+- Any bug fixes from real usage
+
 ---
 
 ## My Role in This Project
