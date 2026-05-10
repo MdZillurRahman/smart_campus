@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PendingApprovals from './pages/PendingApprovals';
 import StudentDashboard from './pages/StudentDashboard';
 import SubmitComplaint from './pages/SubmitComplaint';
 import MyComplaints from './pages/MyComplaints';
@@ -42,6 +43,12 @@ export default function App() {
             <Route path="/admin/dashboard" element={
               <PrivateRoute allowedRoles={['admin']}>
                 <AdminDashboard />
+              </PrivateRoute>
+            } />
+
+            <Route path="/admin/approvals" element={
+              <PrivateRoute allowedRoles={['admin']}>
+                <PendingApprovals />
               </PrivateRoute>
             } />
             <Route path="/staff/dashboard" element={

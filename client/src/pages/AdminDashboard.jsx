@@ -12,7 +12,8 @@ import {
 import {
   LayoutDashboard, Inbox, Clock, CheckCircle2, LogOut,
   Filter, UserPlus, RotateCcw, CheckCheck, Search,
-} from 'lucide-react'
+} from 'lucide-react';
+import { Link } from 'react-router-dom'
 import StatusBadge from '../components/StatusBadge'
 import PriorityBadge from '../components/PriorityBadge'
 import AssignModal from '../components/AssignModal'
@@ -85,9 +86,16 @@ export default function AdminDashboard() {
               <p className="text-slate-500 text-sm">Welcome back, {user.fullname}</p>
             </div>
           </div>
-          <Button size="sm" variant="outline" onClick={logoutUser} className="self-start sm:self-auto">
-            <LogOut className="h-4 w-4 mr-2" /> Logout
-          </Button>
+          <div className="flex gap-2">
+            <Link to="/admin/approvals">
+              <Button size="sm" variant="outline">
+                Pending Approvals
+              </Button>
+            </Link>
+            <Button size="sm" variant="outline" onClick={logoutUser} className="self-start sm:self-auto">
+              <LogOut className="h-4 w-4 mr-2" /> Logout
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}

@@ -9,6 +9,7 @@ When in doubt, ask before deviating — consistency matters more than preference
 
 ### Branch Strategy
 - `main` — production-ready code only. Never commit directly.
+- `staging` — pre-production testing before merging to main
 - `dev` — active development branch. Merge features here first.
 - `feature/<name>` — one branch per feature (e.g. `feature/auth`, `feature/complaint-form`)
 
