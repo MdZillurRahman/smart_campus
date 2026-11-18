@@ -2,7 +2,7 @@ class ComplaintSerializer
   include JSONAPI::Serializer
 
   attributes :title, :description, :category, :priority,
-             :status, :resolution_note, :resolved_at, :created_at
+             :status, :resolution_note, :resolved_at, :created_at, :updated_at
 
   attribute :display_id do |complaint|
     "CMP#{complaint.id.to_s.rjust(3, '0')}"
