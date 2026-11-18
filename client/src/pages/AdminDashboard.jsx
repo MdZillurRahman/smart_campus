@@ -10,7 +10,7 @@ import {
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import {
-  LayoutDashboard, Inbox, Clock, CheckCircle2, LogOut,
+  LayoutDashboard, Inbox, Clock, CheckCircle2,
   Filter, UserPlus, RotateCcw, CheckCheck, Search,
 } from 'lucide-react';
 import { Link } from 'react-router-dom'
@@ -42,7 +42,7 @@ function StatCard({ icon: Icon, label, value, accent, ring }) {
 }
 
 export default function AdminDashboard() {
-  const { user, logoutUser } = useAuth()
+  const { user } = useAuth()
   const [status,   setStatus]   = useState('')
   const [category, setCategory] = useState('')
 
@@ -92,9 +92,6 @@ export default function AdminDashboard() {
                 Pending Approvals
               </Button>
             </Link>
-            <Button size="sm" variant="outline" onClick={logoutUser} className="self-start sm:self-auto">
-              <LogOut className="h-4 w-4 mr-2" /> Logout
-            </Button>
           </div>
         </div>
 
