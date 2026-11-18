@@ -11,7 +11,6 @@ import {
   Loader2,
   CheckCircle2,
   Plus,
-  LogOut,
   ArrowRight,
   Inbox,
 } from 'lucide-react'
@@ -36,7 +35,7 @@ function StatCard({ label, value, icon: Icon, accent }) {
 }
 
 export default function StudentDashboard() {
-  const { user, logoutUser } = useAuth()
+  const { user } = useAuth()
   const { data, isLoading, isError } = useComplaints()
 
   const complaints = data ?? []
@@ -84,10 +83,6 @@ export default function StudentDashboard() {
                 <Plus className="h-4 w-4 mr-1" /> New Complaint
               </Button>
             </Link>
-            <Button size="sm" variant="outline" onClick={logoutUser}>
-              <LogOut className="h-4 w-4 sm:mr-1" />
-              <span className="hidden sm:inline">Logout</span>
-            </Button>
           </div>
         </div>
 

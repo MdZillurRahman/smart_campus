@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import { useComplaints } from '../hooks/useComplaints'
 import { useAuth } from '../context/AuthContext'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ClipboardList, Clock, CheckCircle2, LogOut, Inbox } from 'lucide-react'
+import { ClipboardList, Clock, CheckCircle2, Inbox } from 'lucide-react'
 import TaskCard from '../components/TaskCard'
 import ResolveModal from '../components/ResolveModal'
 
 const STATUSES = ['All', 'In Progress', 'Resolved']
 
 export default function StaffDashboard() {
-  const { user, logoutUser } = useAuth()
+  const { user } = useAuth()
   const [status, setStatus] = useState('')
   const [resolveTarget, setResolveTarget] = useState(null)
 
@@ -38,9 +37,6 @@ export default function StaffDashboard() {
               <p className="text-slate-500 text-sm">Welcome, {user.fullname}</p>
             </div>
           </div>
-          <Button size="sm" variant="outline" onClick={logoutUser} className="self-start sm:self-auto">
-            <LogOut className="h-4 w-4 mr-2" /> Logout
-          </Button>
         </div>
 
         {/* Stat cards */}

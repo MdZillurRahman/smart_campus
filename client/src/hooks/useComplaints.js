@@ -4,10 +4,11 @@ import { getComplaints, createComplaint, assignComplaint, resolveComplaint, reop
 const normalize = (res) =>
   res.data.map(item => ({ id: item.id, ...item.attributes }))
 
-export function useComplaints(filters = {}) {
+export function useComplaints(filters = {}, options = {}) {
   return useQuery({
     queryKey: ['complaints', filters],
     queryFn: () => getComplaints(filters).then(normalize),
+    ...options,
   })
 }
 
