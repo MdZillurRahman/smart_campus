@@ -9,7 +9,7 @@ When in doubt, ask before deviating — consistency matters more than preference
 
 ### Branch Strategy
 - `main` — production-ready code only. Never commit directly.
-- `staging` — pre-production testing before merging to main
+- `staging` — pre-production testing before merging to main. Small, ready-to-test PRs may target it directly.
 - `dev` — active development branch. Merge features here first.
 - `feature/<name>` — one branch per feature (e.g. `feature/auth`, `feature/complaint-form`)
 
@@ -35,7 +35,7 @@ docs: update architecture with database schema
 ```
 
 ### Pull Request Rule
-- Every feature branch → open a PR into `dev`
+- Every feature branch → open a PR into `dev` (or `staging` for small changes that are ready to test)
 - Squash commits on merge to keep history clean
 - No PR merges to `main` unless `dev` is fully tested
 
@@ -106,6 +106,10 @@ docs: update architecture with database schema
 - **Local UI state** (modal open, filter value) → `useState` in the component
 - Do NOT put server data in Context — that is what React Query is for.
 
+### API Responses
+- The API returns JSON:API documents. Normalize them once, in the hook (`{ id, ...attributes }`), never in components.
+- Derived UI data (for example notifications) lives in `utils/` as pure functions, fed by a hook.
+
 ### API Calls
 - All API calls go through `src/api/client.js` (the configured Axios instance).
 - Never call `fetch()` directly — always use the Axios client so JWT is attached automatically.
@@ -140,7 +144,7 @@ docs: update architecture with database schema
 
 ### Seeds
 - `db/seeds.rb` must always contain working demo data:
-  - 1 admin user
+  - 1 admin user (`superadmin`, the only admin; others self-register and need approval)
   - 1 staff user
   - 2-3 student users
   - 5-8 complaints in various states (Submitted, In Progress, Resolved)
@@ -156,7 +160,9 @@ docs: update architecture with database schema
 3. **All user input is validated server-side.** Client validation is UX only, not security.
 4. **`resolved_at` is always set server-side.** Never accept it from the client.
 5. **Staff can only resolve their own assigned complaints.** Check `assigned_to_id == current_user.id` server-side.
-6. **Sensitive data never goes in git.** Use `.env` files locally, Render/Netlify environment variables in production. Both `.env` files are in `.gitignore`.
+6. **`users.status` is always set server-side.** Registration never permits `status`: students start `approved`, staff/admin start `pending`. Only `approve`/`reject` change it. Login and token checks must require `approved`.
+7. **Change seeded passwords on any deployed database.** The seed passwords are public in this repo.
+8. **Sensitive data never goes in git.** Use `.env` files locally, Render/Netlify environment variables in production. Both `.env` files are in `.gitignore`.
 
 ---
 

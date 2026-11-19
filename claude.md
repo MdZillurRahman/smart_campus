@@ -32,7 +32,7 @@ This is a **rebuild** of an existing PHP/HTML/CSS app using a modern full stack.
 smartcampus/          ← single GitHub monorepo
 ├── client/           ← React app
 ├── server/           ← Rails API
-├── docs/             ← all these .md files
+├── *.md              ← architecture, features, rules, implementation, claude (repo root)
 └── README.md
 ```
 
@@ -64,7 +64,7 @@ Local path: `smart_campus/` (based on terminal prompt observed)
 
 ## Data Models (Quick Reference)
 
-**users:** id, username, email, password_digest, role, fullname, created_at, updated_at
+**users:** id, username, email, password_digest, role, fullname, status (pending/approved/rejected), created_at, updated_at
 
 **complaints:** id, student_id (FK), assigned_to_id (FK nullable), category, title, description, priority, status, resolution_note, resolved_at, created_at, updated_at
 
@@ -91,6 +91,7 @@ Local path: `smart_campus/` (based on terminal prompt observed)
 
 ```
 POST   /api/v1/auth/login
+POST   /api/v1/auth/register       (public — students auto-approved, staff/admin pending)
 GET    /api/v1/complaints          (scoped by role)
 POST   /api/v1/complaints          (student)
 GET    /api/v1/complaints/:id
@@ -98,6 +99,9 @@ PATCH  /api/v1/complaints/:id/assign   (admin)
 PATCH  /api/v1/complaints/:id/resolve  (admin, staff)
 PATCH  /api/v1/complaints/:id/reopen   (admin)
 GET    /api/v1/users?role=staff    (admin)
+GET    /api/v1/users/pending       (admin)
+PATCH  /api/v1/users/:id/approve   (admin)
+PATCH  /api/v1/users/:id/reject    (admin)
 ```
 
 ---
@@ -111,7 +115,7 @@ GET    /api/v1/users?role=staff    (admin)
 - Staff can only resolve their OWN assigned complaints (enforced server-side)
 - All routes under `/api/v1/`
 - Commits follow Conventional Commits format (`feat:`, `fix:`, `chore:` etc.)
-- Feature branches → PR into `dev` → merge to `main` only when stable
+- Feature branches → PR into `dev`/`staging` → merge to `main` only when stable
 
 ---
 
@@ -128,145 +132,57 @@ GET    /api/v1/users?role=staff    (admin)
 
 ---
 
+## Live URLs
+
+| Part     | URL |
+|----------|-----|
+| Frontend (Netlify) | https://smartcampusissuetracking.netlify.app |
+| API (Render)       | https://smartcampus-api-ml3z.onrender.com |
+
+> The frontend was confirmed loading on 2026-11-18. The API URL is as reported by the developer — it could not be fetched from the review environment, so verify it with a login request.
+
+---
+
 ## Current Status
 
 > ⚠️ UPDATE THIS SECTION AT THE END OF EVERY SESSION
 
-**Active Phase:** Phase 2A — React Setup + Auth UI
-**What was completed last session:**
-- Scaffolded Rails API inside `server/`
-- Configured PostgreSQL, CORS, environment variables
-- Wrote and ran all migrations (users + complaints + add_status_to_users)
-- Built User and Complaint models with validations and scopes
-- Built ApplicationController with JWT auth (authenticate_user!, require_role!)
-- Built AuthController (login)
-- Built RegistrationsController (hybrid approval — students auto-approved, staff/admin pending)
-- Built ComplaintsController (index, show, create, assign, resolve, reopen)
-- Built UsersController (index, pending, approve, reject)
-- Built UserSerializer and ComplaintSerializer
-- Seeded database with superadmin, staff1, student1, student2 + 5 complaints
-- Tested all endpoints in Postman — all passing
-- Merged feature/rails-setup → dev → staging
+**Overall:** Phases 1–4 complete — the app is deployed. Now in post-launch polish.
+**Last updated:** 2026-11-19
 
-**What to do next session:**
-- Start Phase 2A — scaffold React + Vite inside `client/`
-- Install and configure Tailwind CSS + shadcn/ui
-- Set up Axios client with JWT interceptor
-- Build AuthContext and PrivateRoute
-- Build Login page
-- Build Registration page with role selector
+**Built and deployed**
+- Rails API: JWT auth, registration with hybrid approval, complaints (index/show/create/assign/resolve/reopen), users (index/pending/approve/reject), serializers, seeds
+- React client: Login, Register, landing page, student views, admin dashboard, staff dashboard, assign/resolve modals, pending approvals page, global expired-JWT handling
+- Deployed: API on Render, client on Netlify (production DB seeded via the Render build command)
 
-**Active Phase:** Phase 1A — Rails API Setup
-**What was completed last session:**
-- Created GitHub monorepo (`smart_campus`)
-- Created `docs/` folder with: `architecture.md`, `features.md`, `rules.md`, `implementation.md`, `claude.md`
+**In review (PR into `staging`, branch `feature/navbar-notifications`)**
+- `Navbar` (role-aware links, mobile menu, logout) rendered by `PrivateRoute`
+- `NotificationBell` — student status updates, admin unassigned complaints, staff open tasks (derived client-side from the complaints list; polls every 60s)
+- `ComplaintSerializer` now exposes `updated_at`
+- Per-page logout buttons removed (the navbar replaces them)
 
-**What to do next session:**
-- Scaffold Rails API app inside `server/` folder
-- Configure PostgreSQL 18 (start with: brew services start postgresql@18)
-- Add gems and run first migration
+**Next**
+- Test and merge the navbar/notifications PR, then promote `staging` → `main`
+- Enforce `status == approved` at login and in `authenticate_user!` (pending/rejected users can currently log in)
+- Change the production `superadmin` password (production was seeded with the default seed passwords)
+- Add `.env.example` files so a fresh clone is easy to run
+- Phase 2 features: email notifications on approval/assignment/resolution, comments thread, file attachments
+- Phase 3 features: search, pagination, analytics
 
-**Active Phase:** Phase 2B — Student Views
+**Local setup reminder**
+- `server/.env`: `SECRET_KEY_BASE`, `ALLOWED_ORIGINS=http://localhost:5173`
+- `client/.env`: `VITE_API_URL=http://localhost:3001/api/v1`
+- PostgreSQL running → `bin/rails db:create db:migrate db:seed` → `bin/rails s -p 3001`; client: `npm run dev`
+- Seed logins (local/demo): `superadmin`/`super123`, `staff1`/`staff123`, `student1`/`student123`, `student2`/`student123`. There is no `admin1` user.
 
-**What was completed last session:**
-- Scaffolded React + Vite inside client/
-- Installed all dependencies (Axios, React Query, React Router, RHF, Zod)
-- Configured Tailwind CSS v4 and shadcn/ui
-- Set up Axios client with JWT interceptor (src/api/client.js)
-- Built AuthContext with login, logout, localStorage persistence
-- Built PrivateRoute with role-based protection
-- Built Login page with Zod validation and error handling
-- Set up all routes in App.jsx with placeholder dashboards
-- Tested login → correct redirect for all 3 roles (superadmin, student1, staff1)
-
-**What to do next session:**
-- Build StudentDashboard (stat cards + recent complaints)
-- Build SubmitComplaint page
-- Build MyComplaints page with filters
-- Build StatusBadge and PriorityBadge components
-- Build ComplaintRow with expandable detail
-
-**Active Phase:** Phase 2C — Admin + Staff Views
-
-**What was completed last session:**
-- Built StatusBadge and PriorityBadge components
-- Built ComplaintRow with expandable detail
-- Built resolutionTime util
-- Built useComplaints hook with jsonapi-serializer normalization fix
-- Built StudentDashboard with stat cards and recent complaints
-- Built SubmitComplaint form with Zod validation
-- Built MyComplaints with status/category filters
-- Updated App.jsx with all student routes
-- Tested all student flows end to end — working
-
-**What to do next session:**
-- Build AdminDashboard with all complaints + stat cards
-- Build AssignModal (staff dropdown)
-- Build ResolveModal (resolution note)
-- Build reopen confirmation
-- Build StaffDashboard with assigned task cards
-- Build TaskCard with priority colour stripe
-- Wire staff resolve modal
-
-**Active Phase:** Phase 3 — Integration + Polish
-
-**What was completed last session:**
-- Built AssignModal with staff dropdown
-- Built ResolveModal with resolution note
-- Built AdminDashboard with stat cards, filters, assign/resolve/reopen
-- Built StaffDashboard with TaskCard and priority colour stripe
-- Wired all mutations with React Query cache invalidation
-- Tested full complaint lifecycle as superadmin and staff1 — all working
-- PostgreSQL 18 (brew services start postgresql@18)
-
-**What to do next session:**
-- Global expired JWT handling (auto-logout + redirect)
-- Mobile responsiveness pass
-- Build Landing page
-- UI polish pass
-- Then move to Phase 4 — Deployment
-
-**Active Phase:** Phase 4 — Deployment
-
-**What was completed last session:**
-- Built global JWT expiry handling (axios response interceptor + ?expired=true redirect)
-- Built Registration page with role selector and Zod validation
-- Student → auto login on registration
-- Staff/Admin → pending approval screen on registration
-- Fixed duplicate username/email error display (errors array vs error string)
-- Built Landing page (hero, roles, features, how it works, categories, CTA, footer)
-- Added Register button to landing page navbar and CTA section
-- Mobile responsiveness handled via Tailwind responsive prefixes
-- Merged feature/phase3-integration → dev → main
-
-**What to do next session:**
-- Deploy Rails API to Render
-- Deploy React app to Netlify
-- Seed production database
-- End-to-end test on live URLs
-- Build pending approvals UI for admin/superadmin
-
-**Known gap:**
-- Pending approval management UI not yet built
-- Admin needs a page to approve/reject pending staff registrations
-- Superadmin needs a page to approve/reject pending admin registrations
-
-**Active Phase:** Complete — Post-launch polish
-
-**What was completed last session:**
-- Deployed Rails API to Render
-- Deployed React app to Netlify
-- Fixed production.rb for API mode (removed active_storage, solid_cache, solid_queue)
-- Fixed start command on Render
-- Seeded production database via build command
-- Built pending approvals page (admin sees staff, superadmin sees all)
-- Approve and reject with React Query cache invalidation
-- Merged all features → dev → staging → main
-
-**What to do next session:**
-- Build registration approval notification (tell user they're approved via email) — Phase 2
-- Analytics dashboard — Phase 3
-- Any bug fixes from real usage
+**Session history (short)**
+1. Repo + docs created
+2. Rails API (models, auth, complaints, users, serializers, seeds) tested in Postman
+3. React setup + auth UI
+4. Student views → admin + staff views
+5. Integration, JWT expiry handling, registration, landing page
+6. Deployment (Render + Netlify), production.rb fixed for API mode, pending approvals page
+7. Navbar + notification bell (PR in review); docs refreshed
 
 ---
 

@@ -2,15 +2,16 @@
 
 ## Timeline: 2–3 Weeks (Accelerated)
 > Started: May 2026
-> Target Completion: Late May 2026
+> Phases 1–4 completed and deployed in May 2026. Post-launch work continues.
 
 ---
 
 ## Current Status
 
-**Active Phase:** Phase 1 — Backend Foundation
-**Current Task:** Rails API scaffolding
-**Last Completed:** Repo setup, docs folder created
+**Overall:** All planned phases complete; deployed. Post-launch polish in progress.
+**Live:** Frontend https://smartcampusissuetracking.netlify.app · API https://smartcampus-api-ml3z.onrender.com
+**In review:** `feature/navbar-notifications` → `staging` (Navbar + NotificationBell)
+**Last updated:** 2026-11-19
 
 ---
 
@@ -20,11 +21,12 @@
 |-------|------------------------------|-----------|-------------|
 | 1A    | Rails API setup + DB + Auth  | Days 1–4  | ✅ Done     |
 | 1B    | Complaints API               | Days 5–7  | ✅ Done     |
-| 2A    | React setup + Auth UI        | Days 8–10 | 🔄 Next     |
-| 2B    | Student views                | Days 11–13| Not started |
-| 2C    | Admin + Staff views          | Days 14–16| Not started |
-| 3     | Integration + Polish         | Days 17–18| Not started |
-| 4     | Deployment                   | Days 19–21| Not started |
+| 2A    | React setup + Auth UI        | Days 8–10 | ✅ Done     |
+| 2B    | Student views                | Days 11–13| ✅ Done     |
+| 2C    | Admin + Staff views          | Days 14–16| ✅ Done     |
+| 3     | Integration + Polish         | Days 17–18| ✅ Done     |
+| 4     | Deployment                   | Days 19–21| ✅ Done     |
+| 5     | Post-launch polish (navbar, notifications, docs) | —  | 🔄 In review |
 
 ---
 
@@ -32,19 +34,19 @@
 > Goal: A working Rails API that can register users, store complaints in PostgreSQL, and issue JWTs
 
 ### Tasks
-- [ ] Scaffold Rails API app inside `server/` folder
-- [ ] Configure PostgreSQL (`database.yml`)
-- [ ] Add gems: `pg`, `rack-cors`, `bcrypt`, `jwt`, `jsonapi-serializer`
-- [ ] Create and run `create_users` migration
-- [ ] Create and run `create_complaints` migration
-- [ ] Build `User` model with `has_secure_password` and validations
-- [ ] Build `Complaint` model with validations and scopes
-- [ ] Write `db/seeds.rb` with demo users and complaints
-- [ ] Run `rails db:create db:migrate db:seed` — confirm data exists
-- [ ] Build `ApplicationController` with `authenticate_user!` and `require_role!`
-- [ ] Build `Api::V1::AuthController` — login action returns JWT
-- [ ] Test login endpoint in Postman/Insomnia
-- [ ] Configure CORS (`rack-cors`) to allow `localhost:5173`
+- [x] Scaffold Rails API app inside `server/` folder
+- [x] Configure PostgreSQL (`database.yml`)
+- [x] Add gems: `pg`, `rack-cors`, `bcrypt`, `jwt`, `jsonapi-serializer`
+- [x] Create and run `create_users` migration
+- [x] Create and run `create_complaints` migration
+- [x] Build `User` model with `has_secure_password` and validations
+- [x] Build `Complaint` model with validations and scopes
+- [x] Write `db/seeds.rb` with demo users and complaints
+- [x] Run `rails db:create db:migrate db:seed` — confirm data exists
+- [x] Build `ApplicationController` with `authenticate_user!` and `require_role!`
+- [x] Build `Api::V1::AuthController` — login action returns JWT
+- [x] Test login endpoint in Postman/Insomnia
+- [x] Configure CORS (`rack-cors`) to allow `localhost:5173`
 
 ### Why we do it in this order
 > Database and models first — controllers are useless without working data.
@@ -57,15 +59,15 @@
 > Goal: All complaint endpoints working and testable in Postman
 
 ### Tasks
-- [ ] Build `Api::V1::ComplaintsController` — `index` action (role-scoped)
-- [ ] Build `create` action (student only)
-- [ ] Build `assign` action (admin only)
-- [ ] Build `resolve` action (admin + staff, with ownership check for staff)
-- [ ] Build `reopen` action (admin only)
-- [ ] Build `Api::V1::UsersController` — `index` with `?role=staff` filter
-- [ ] Build `UserSerializer` and `ComplaintSerializer`
-- [ ] Test every endpoint in Postman with all 3 roles
-- [ ] Confirm 401 on missing token, 403 on wrong role
+- [x] Build `Api::V1::ComplaintsController` — `index` action (role-scoped)
+- [x] Build `create` action (student only)
+- [x] Build `assign` action (admin only)
+- [x] Build `resolve` action (admin + staff, with ownership check for staff)
+- [x] Build `reopen` action (admin only)
+- [x] Build `Api::V1::UsersController` — `index` with `?role=staff` filter
+- [x] Build `UserSerializer` and `ComplaintSerializer`
+- [x] Test every endpoint in Postman with all 3 roles
+- [x] Confirm 401 on missing token, 403 on wrong role
 
 ### Why we do it in this order
 > Index and create first — they are the simplest and confirm DB read/write works.
@@ -78,18 +80,18 @@
 > Goal: A running React app that can log in, store the JWT, and redirect by role
 
 ### Tasks
-- [ ] Scaffold React + Vite app inside `client/` folder
-- [ ] Install dependencies: React Router, Axios, React Query, React Hook Form, Zod
-- [ ] Install and configure Tailwind CSS
-- [ ] Install and configure shadcn/ui
-- [ ] Set up `src/api/client.js` (Axios instance with JWT interceptor)
-- [ ] Set up `AuthContext` (login, logout, persist to localStorage)
-- [ ] Build `PrivateRoute` component
-- [ ] Set up routes in `App.jsx` (all pages, protected by role)
-- [ ] Build `Login` page — form, validation, call API, store token, redirect
-- [ ] Build `Navbar` component (role-aware links, logout button)
-- [ ] Test login → redirect to correct dashboard for all 3 roles
-- [ ] Test protected route redirect (unauthenticated → login page)
+- [x] Scaffold React + Vite app inside `client/` folder
+- [x] Install dependencies: React Router, Axios, React Query, React Hook Form, Zod
+- [x] Install and configure Tailwind CSS
+- [x] Install and configure shadcn/ui
+- [x] Set up `src/api/client.js` (Axios instance with JWT interceptor)
+- [x] Set up `AuthContext` (login, logout, persist to localStorage)
+- [x] Build `PrivateRoute` component
+- [x] Set up routes in `App.jsx` (all pages, protected by role)
+- [x] Build `Login` page — form, validation, call API, store token, redirect
+- [x] Build `Navbar` component (role-aware links, logout button) — *in PR, pending merge*
+- [x] Test login → redirect to correct dashboard for all 3 roles
+- [x] Test protected route redirect (unauthenticated → login page)
 
 ### Why we do it in this order
 > Tooling first — you cannot build UI without the foundation.
@@ -102,14 +104,14 @@
 > Goal: Students can submit complaints and track them
 
 ### Tasks
-- [ ] Build `StudentDashboard` — stat cards + recent complaints table
-- [ ] Build `SubmitComplaint` — form with validation (React Hook Form + Zod)
-- [ ] Build `MyComplaints` — full list with status/category filters
-- [ ] Build `ComplaintRow` with expandable detail (description, assigned staff, resolution)
-- [ ] Build `StatusBadge` and `PriorityBadge` components
-- [ ] Build `ResolutionTime` util (`resolutionTime.js`)
-- [ ] Build `NotificationBell` component (student notifications)
-- [ ] Add loading and empty states to all views
+- [x] Build `StudentDashboard` — stat cards + recent complaints table
+- [x] Build `SubmitComplaint` — form with validation (React Hook Form + Zod)
+- [x] Build `MyComplaints` — full list with status/category filters
+- [x] Build `ComplaintRow` with expandable detail (description, assigned staff, resolution)
+- [x] Build `StatusBadge` and `PriorityBadge` components
+- [x] Build `ResolutionTime` util (`resolutionTime.js`)
+- [x] Build `NotificationBell` component (student notifications) — *in PR, pending merge*
+- [x] Add loading and empty states to all views
 
 ---
 
@@ -117,14 +119,14 @@
 > Goal: Admin can manage all complaints, staff can resolve their tasks
 
 ### Tasks
-- [ ] Build `AdminDashboard` — all complaints table with stat cards
-- [ ] Build `AssignModal` — staff dropdown, confirm assign
-- [ ] Build `ResolveModal` — resolution note textarea
-- [ ] Wire reopen button with confirm dialog
-- [ ] Build `StaffDashboard` — task cards filtered to assigned complaints
-- [ ] Build `TaskCard` component with priority colour stripe
-- [ ] Wire staff resolve modal
-- [ ] Add notification bells for admin and staff
+- [x] Build `AdminDashboard` — all complaints table with stat cards
+- [x] Build `AssignModal` — staff dropdown, confirm assign
+- [x] Build `ResolveModal` — resolution note textarea
+- [x] Wire reopen button with confirm dialog
+- [x] Build `StaffDashboard` — task cards filtered to assigned complaints
+- [x] Build `TaskCard` component with priority colour stripe
+- [x] Wire staff resolve modal
+- [x] Add notification bells for admin and staff — *in PR, pending merge*
 
 ---
 
@@ -132,13 +134,14 @@
 > Goal: Frontend and backend fully connected, edge cases handled
 
 ### Tasks
-- [ ] Connect all React API calls to the live Rails server (localhost:3001)
-- [ ] Fix any CORS issues that appear during integration
-- [ ] Test full complaint lifecycle end-to-end (submit → assign → resolve → reopen)
-- [ ] Test all role restrictions in the UI (not just API)
-- [ ] Add global error handling for expired JWT (auto-logout + redirect)
-- [ ] Mobile responsiveness pass — test on narrow viewport
-- [ ] Build `Landing` page (index.html equivalent)
+- [x] Connect all React API calls to the live Rails server (localhost:3001)
+- [x] Add registration page + hybrid approval flow (students auto-approved; staff/admin pending) and pending approvals page for admin/superadmin
+- [x] Fix any CORS issues that appear during integration
+- [x] Test full complaint lifecycle end-to-end (submit → assign → resolve → reopen)
+- [x] Test all role restrictions in the UI (not just API) — *recorded as done by the developer; not independently re-verified*
+- [x] Add global error handling for expired JWT (auto-logout + redirect)
+- [x] Mobile responsiveness pass — test on narrow viewport
+- [x] Build `Landing` page (index.html equivalent)
 
 ---
 
@@ -146,21 +149,22 @@
 > Goal: Live URLs on Render (API) and Netlify (frontend)
 
 ### Tasks
-- [ ] Push `server/` to GitHub (`main` branch)
-- [ ] Create Render Web Service — connect GitHub repo, set root to `server/`
-- [ ] Create Render PostgreSQL database — attach to web service
-- [ ] Set environment variables on Render:
+- [x] Push `server/` to GitHub (`main` branch)
+- [x] Create Render Web Service — connect GitHub repo, set root to `server/`
+- [x] Create Render PostgreSQL database — attach to web service
+- [x] Set environment variables on Render:
   - `RAILS_ENV=production`
   - `SECRET_KEY_BASE` (generate with `rails secret`)
   - `DATABASE_URL` (auto-filled by Render)
   - `ALLOWED_ORIGINS=https://your-app.netlify.app`
-- [ ] Run `rails db:migrate` and `rails db:seed` on Render
-- [ ] Test all API endpoints against the Render URL in Postman
-- [ ] Push `client/` to GitHub
-- [ ] Create Netlify site — connect GitHub repo, set base to `client/`
-- [ ] Set `VITE_API_URL=https://your-api.onrender.com/api/v1` on Netlify
-- [ ] Add `public/_redirects` file for React Router SPA fix
-- [ ] Test full app on live URLs
+- [x] Run `rails db:migrate` and `rails db:seed` on Render
+- [x] Test all API endpoints against the Render URL in Postman
+- [x] Fix `production.rb` for API mode (removed active_storage, solid_cache, solid_queue); fix Render start command
+- [x] Push `client/` to GitHub
+- [x] Create Netlify site — connect GitHub repo, set base to `client/`
+- [x] Set `VITE_API_URL=https://your-api.onrender.com/api/v1` on Netlify
+- [x] Add `public/_redirects` file for React Router SPA fix
+- [x] Test full app on live URLs
 
 ---
 
@@ -174,6 +178,11 @@
 | May 2026 | No Devise gem                                 | Devise is designed for session-based Rails apps. JWT auth is cleaner to implement manually for an API. |
 | May 2026 | Integer PKs, display CMP001 in frontend       | Simpler DB. Format is a display concern, not a data concern. |
 | May 2026 | React Query for server state                  | Avoids useEffect + useState boilerplate for every API call. Handles caching and refetching automatically. |
+| May 2026 | Hybrid registration approval (students auto-approved; staff/admin pending) | Anyone can self-register as a student, but staff/admin power needs a human sign-off. `users.status` is set server-side only. |
+| May 2026 | `superadmin` is a seeded admin; admins approve staff, superadmin approves admins | Prevents anyone self-promoting to admin. |
+| May 2026 | Rails API-mode production.rb trimmed (no active_storage / solid_cache / solid_queue) | Not needed for a JSON API; they broke the Render boot. |
+| Nov 2026 | Notifications derived client-side from the complaints list (no notifications table) | Zero backend/migration cost; good enough for the current scale. Revisit if email/push is added. |
+| Nov 2026 | Navbar rendered by `PrivateRoute` | One place covers every protected page; pages no longer carry their own logout button. |
 | May 2026 | No Redux                                      | Overkill. Auth in Context + server data in React Query covers everything. |
 
 ---
@@ -181,7 +190,13 @@
 ## Known Issues / Blockers
 > Add anything that is blocking progress here.
 
-_None yet._
+- **Approval status is not enforced at login.** `AuthController#login` and `authenticate_user!` never check `users.status`, so a `pending` or `rejected` staff/admin can still log in with their own credentials. Fix: reject login (and token use) unless `user.approved?`, and show a friendly message in `Login.jsx`.
+- **Default seed passwords in production.** Production was seeded with `db/seeds.rb`, whose passwords are public in the repo. Change the `superadmin` password (and staff/student demo passwords) on the live database.
+- **No `.env.example` files.** `server/.env` and `client/.env` are git-ignored, so a fresh clone fails to boot until they are created (see root README).
+- **Notifications are derived, not stored.** Students' "unread" is tracked in `localStorage` per browser; admin/staff bells show current to-do items.
+- **Admin dashboard has two paths to Pending Approvals** (navbar link + existing button). Harmless; can drop the button.
+- **Client bundle > 500 kB** (Vite warning). Fine for now; route-level code splitting is the fix if load time matters.
+- **API URL not independently verified** from the review environment — confirm with a real login.
 
 ---
 
