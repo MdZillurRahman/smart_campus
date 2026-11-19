@@ -10,7 +10,7 @@
 
 **Overall:** All planned phases complete; deployed. Post-launch polish in progress.
 **Live:** Frontend https://smartcampusissuetracking.netlify.app · API https://smartcampus-api-ml3z.onrender.com
-**Merged:** Navbar + NotificationBell, docs refresh. **In review:** `fix/enforce-approval-at-login`
+**Merged:** Navbar + NotificationBell, docs refresh. **In review:** `fix/hardening-and-cleanup`
 **Last updated:** 2026-11-19
 
 ---
@@ -182,6 +182,8 @@
 | May 2026 | `superadmin` is a seeded admin; admins approve staff, superadmin approves admins | Prevents anyone self-promoting to admin. |
 | May 2026 | Rails API-mode production.rb trimmed (no active_storage / solid_cache / solid_queue) | Not needed for a JSON API; they broke the Render boot. |
 | Nov 2026 | Login and token checks require `status == approved`; login returns 403 with a clear message for pending/rejected (only after the password is verified) | Registration approval was previously bypassable: pending/rejected staff/admin could log in. Password is checked first so status isn't leaked to guessers. A token for a non-approved user gets 401, so a user rejected mid-session is logged out. |
+| Nov 2026 | Complaint state machine enforced server-side: assign only if not Resolved (and only to approved staff), resolve needs a note and cannot repeat, reopen only from Resolved | The UI already only offered these transitions, but the API accepted any, so a direct call could assign a resolved complaint and leave stale resolution data. |
+| Nov 2026 | Login rate limiting deferred | Rails `rate_limit` needs a working cache store and could not be tested here; shared demo credentials mean many testers can share one IP. Revisit with a generous limit once testable. |
 | Nov 2026 | Notifications derived client-side from the complaints list (no notifications table) | Zero backend/migration cost; good enough for the current scale. Revisit if email/push is added. |
 | Nov 2026 | Navbar rendered by `PrivateRoute` | One place covers every protected page; pages no longer carry their own logout button. |
 | May 2026 | No Redux                                      | Overkill. Auth in Context + server data in React Query covers everything. |
@@ -191,10 +193,8 @@
 ## Known Issues / Blockers
 > Add anything that is blocking progress here.
 
-- **Default seed passwords in production.** Production was seeded with `db/seeds.rb`, whose passwords are public in the repo. Change the `superadmin` password (and staff/student demo passwords) on the live database.
-- **No `.env.example` files.** `server/.env` and `client/.env` are git-ignored, so a fresh clone fails to boot until they are created (see root README).
+- **Demo credentials are intentionally public.** The login page shows `superadmin`/`super123`, `staff1`, `student1` so customers can try the app. Anyone can therefore act as admin on the deployed site; do not put real data there, or switch to a separate demo deployment before real use.
 - **Notifications are derived, not stored.** Students' "unread" is tracked in `localStorage` per browser; admin/staff bells show current to-do items.
-- **Admin dashboard has two paths to Pending Approvals** (navbar link + existing button). Harmless; can drop the button.
 - **Client bundle > 500 kB** (Vite warning). Fine for now; route-level code splitting is the fix if load time matters.
 - **API URL not independently verified** from the review environment — confirm with a real login.
 

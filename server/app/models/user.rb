@@ -14,6 +14,7 @@ class User < ApplicationRecord
   ROLES    = %w[student admin staff].freeze
   STATUSES = %w[pending approved rejected].freeze
 
+  validates :password, length: { minimum: 6 }, allow_nil: true
   validates :username, presence: true,
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 50 }
