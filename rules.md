@@ -160,7 +160,7 @@ docs: update architecture with database schema
 3. **All user input is validated server-side.** Client validation is UX only, not security.
 4. **`resolved_at` is always set server-side.** Never accept it from the client.
 5. **Staff can only resolve their own assigned complaints.** Check `assigned_to_id == current_user.id` server-side.
-6. **`users.status` is always set server-side.** Registration never permits `status`: students start `approved`, staff/admin start `pending`. Only `approve`/`reject` change it. Login and token checks must require `approved`.
+6. **`users.status` is always set server-side.** Registration never permits `status`: students start `approved`, staff/admin start `pending`. Only `approve`/`reject` change it. Login and token checks require `approved` (`AuthController#login`, `authenticate_user!`).
 7. **Change seeded passwords on any deployed database.** The seed passwords are public in this repo.
 8. **Sensitive data never goes in git.** Use `.env` files locally, Render/Netlify environment variables in production. Both `.env` files are in `.gitignore`.
 

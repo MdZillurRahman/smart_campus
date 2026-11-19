@@ -8,7 +8,7 @@ import { login } from '../api/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Lock, User, AlertCircle, Eye, EyeOff, CheckCircle2 } from 'lucide-react';
 
 const schema = z.object({
   username: z.string().min(1, 'Username is required'),
@@ -181,8 +181,8 @@ export default function Login() {
               </div>
               <div className="rounded-lg bg-slate-50 p-2">
                 <p className="font-medium text-slate-700">Admin</p>
-                <p className="text-slate-500">admin1</p>
-                <p className="text-slate-500">admin123</p>
+                <p className="text-slate-500">superadmin</p>
+                <p className="text-slate-500">super123</p>
               </div>
               <div className="rounded-lg bg-slate-50 p-2">
                 <p className="font-medium text-slate-700">Staff</p>

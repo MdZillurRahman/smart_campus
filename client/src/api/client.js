@@ -17,7 +17,8 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isAuthRequest = /\/auth\/(login|register)$/.test(error.config?.url ?? '')
+    if (error.response?.status === 401 && !isAuthRequest) {
       localStorage.removeItem('sc_token');
       localStorage.removeItem('sc_user');
       window.location.href = '/login?expired=true';
