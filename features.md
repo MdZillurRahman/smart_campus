@@ -1,6 +1,8 @@
 # SmartCampus — Features
 
-Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
+Status legend: `[ ]` not started · `[~]` in progress / partial · `[x]` done
+
+_Last updated: 2026-11-19. Phase 1 is complete and deployed. Phase 2 is partly done (registration + approvals). Phase 3 has not started._
 
 ---
 
@@ -8,48 +10,48 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 > Target: Week 1–2
 
 ### Authentication
-- [ ] User login with username + password
-- [ ] Password stored as bcrypt hash (NOT plaintext like v1)
-- [ ] JWT token issued on login
-- [ ] JWT decoded on every protected request
-- [ ] Role-based route protection (student / admin / staff)
-- [ ] Logout (clear token client-side)
-- [ ] Auto-redirect to login if token is missing or expired
+- [x] User login with username + password
+- [x] Password stored as bcrypt hash (NOT plaintext like v1)
+- [x] JWT token issued on login
+- [x] JWT decoded on every protected request
+- [x] Role-based route protection (student / admin / staff)
+- [x] Logout (clear token client-side)
+- [x] Auto-redirect to login if token is missing or expired
 
 ### Student
-- [ ] View personal dashboard with 4 stat cards (Total / Pending / In Progress / Resolved)
-- [ ] View 5 most recent complaints on dashboard
-- [ ] Submit a new complaint (category, title, description, priority)
-- [ ] View all personal complaints with filters (status, category)
-- [ ] Expand a complaint row to see full description + resolution info
-- [ ] See resolution time chip (e.g. "2.3 days")
-- [ ] Notification bell showing complaint status updates
+- [x] View personal dashboard with 4 stat cards (Total / Pending / In Progress / Resolved)
+- [x] View 5 most recent complaints on dashboard
+- [x] Submit a new complaint (category, title, description, priority)
+- [x] View all personal complaints with filters (status, category)
+- [x] Expand a complaint row to see full description + resolution info
+- [x] See resolution time chip (e.g. "2.3 days")
+- [~] Notification bell showing complaint status updates — in PR `feature/navbar-notifications`, pending merge
 
 ### Admin
-- [ ] View all complaints (all students) with stat cards
-- [ ] Filter complaints by status and category
-- [ ] Assign a complaint to a staff member → status becomes "In Progress"
-- [ ] Resolve a complaint with a resolution note → status becomes "Resolved"
-- [ ] Reopen a resolved complaint → status resets to "Submitted"
-- [ ] Expand complaint rows to see full detail
-- [ ] Notification bell for unassigned complaints
+- [x] View all complaints (all students) with stat cards
+- [x] Filter complaints by status and category
+- [x] Assign a complaint to a staff member → status becomes "In Progress"
+- [x] Resolve a complaint with a resolution note → status becomes "Resolved"
+- [x] Reopen a resolved complaint → status resets to "Submitted"
+- [x] Expand complaint rows to see full detail
+- [~] Notification bell for unassigned complaints — in PR `feature/navbar-notifications`, pending merge
 
 ### Staff
-- [ ] View only complaints assigned to them
-- [ ] Filter by pending / resolved
-- [ ] Resolve an assigned complaint with a resolution note
-- [ ] Notification bell for newly assigned tasks
+- [x] View only complaints assigned to them
+- [x] Filter by pending / resolved
+- [x] Resolve an assigned complaint with a resolution note
+- [~] Notification bell for newly assigned tasks — in PR `feature/navbar-notifications`, pending merge
 
 ### Shared UI
-- [ ] Landing page (marketing, how it works, roles)
-- [ ] Role-aware navbar (different links per role)
-- [ ] Status badges (Submitted / In Progress / Resolved)
-- [ ] Priority badges (High / Medium / Low)
-- [ ] Priority-coloured task cards for staff
-- [ ] Empty states with CTAs
-- [ ] Loading states on all data fetches
-- [ ] Error states with user-friendly messages
-- [ ] Responsive layout (mobile-friendly)
+- [x] Landing page (marketing, how it works, roles)
+- [~] Role-aware navbar (different links per role) — in PR `feature/navbar-notifications`, pending merge
+- [x] Status badges (Submitted / In Progress / Resolved)
+- [x] Priority badges (High / Medium / Low)
+- [x] Priority-coloured task cards for staff
+- [x] Empty states with CTAs
+- [x] Loading states on all data fetches
+- [x] Error states with user-friendly messages
+- [x] Responsive layout (mobile-friendly)
 
 ---
 
@@ -57,13 +59,14 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 > Target: Week 3 (stretch goals after core is done)
 
 ### User Management
-- [ ] Student self-registration (email + username + password)
-- [ ] Admin can view all users
-- [ ] Admin can add new staff accounts
+- [x] Self-registration (email + username + password): students auto-approved, staff/admin queued as pending
+- [ ] Admin can view all users (only the pending queue exists so far)
+- [~] Admin can add new staff accounts (today: staff self-register and an admin approves; no direct create form)
 - [ ] Admin can deactivate a user account
-- [ ] Admin can view and approve pending staff registrations
-- [ ] Superadmin can view and approve pending admin registrations
-- [ ] Reject pending registrations with feedback
+- [x] Admin can view and approve pending staff registrations
+- [x] Superadmin can view and approve pending admin registrations
+- [~] Reject pending registrations (reject works; sending feedback to the user does not)
+- [ ] Block pending/rejected users from logging in (**known gap**, see implementation.md)
 
 ### Notifications (Email)
 - [ ] Email sent to student when complaint is assigned
