@@ -10,7 +10,7 @@
 
 **Overall:** All planned phases complete; deployed. Post-launch polish in progress.
 **Live:** Frontend https://smartcampusissuetracking.netlify.app · API https://smartcampus-api-ml3z.onrender.com
-**In review:** `feature/navbar-notifications` → `staging` (Navbar + NotificationBell)
+**Merged:** Navbar + NotificationBell, docs refresh. **In review:** `fix/enforce-approval-at-login`
 **Last updated:** 2026-11-19
 
 ---
@@ -26,7 +26,7 @@
 | 2C    | Admin + Staff views          | Days 14–16| ✅ Done     |
 | 3     | Integration + Polish         | Days 17–18| ✅ Done     |
 | 4     | Deployment                   | Days 19–21| ✅ Done     |
-| 5     | Post-launch polish (navbar, notifications, docs) | —  | 🔄 In review |
+| 5     | Post-launch polish (navbar, notifications, docs, approval fix) | —  | 🔄 In progress |
 
 ---
 
@@ -89,7 +89,7 @@
 - [x] Build `PrivateRoute` component
 - [x] Set up routes in `App.jsx` (all pages, protected by role)
 - [x] Build `Login` page — form, validation, call API, store token, redirect
-- [x] Build `Navbar` component (role-aware links, logout button) — *in PR, pending merge*
+- [x] Build `Navbar` component (role-aware links, logout button)
 - [x] Test login → redirect to correct dashboard for all 3 roles
 - [x] Test protected route redirect (unauthenticated → login page)
 
@@ -110,7 +110,7 @@
 - [x] Build `ComplaintRow` with expandable detail (description, assigned staff, resolution)
 - [x] Build `StatusBadge` and `PriorityBadge` components
 - [x] Build `ResolutionTime` util (`resolutionTime.js`)
-- [x] Build `NotificationBell` component (student notifications) — *in PR, pending merge*
+- [x] Build `NotificationBell` component (student notifications)
 - [x] Add loading and empty states to all views
 
 ---
@@ -126,7 +126,7 @@
 - [x] Build `StaffDashboard` — task cards filtered to assigned complaints
 - [x] Build `TaskCard` component with priority colour stripe
 - [x] Wire staff resolve modal
-- [x] Add notification bells for admin and staff — *in PR, pending merge*
+- [x] Add notification bells for admin and staff
 
 ---
 
@@ -181,6 +181,7 @@
 | May 2026 | Hybrid registration approval (students auto-approved; staff/admin pending) | Anyone can self-register as a student, but staff/admin power needs a human sign-off. `users.status` is set server-side only. |
 | May 2026 | `superadmin` is a seeded admin; admins approve staff, superadmin approves admins | Prevents anyone self-promoting to admin. |
 | May 2026 | Rails API-mode production.rb trimmed (no active_storage / solid_cache / solid_queue) | Not needed for a JSON API; they broke the Render boot. |
+| Nov 2026 | Login and token checks require `status == approved`; login returns 403 with a clear message for pending/rejected (only after the password is verified) | Registration approval was previously bypassable: pending/rejected staff/admin could log in. Password is checked first so status isn't leaked to guessers. A token for a non-approved user gets 401, so a user rejected mid-session is logged out. |
 | Nov 2026 | Notifications derived client-side from the complaints list (no notifications table) | Zero backend/migration cost; good enough for the current scale. Revisit if email/push is added. |
 | Nov 2026 | Navbar rendered by `PrivateRoute` | One place covers every protected page; pages no longer carry their own logout button. |
 | May 2026 | No Redux                                      | Overkill. Auth in Context + server data in React Query covers everything. |
@@ -190,7 +191,6 @@
 ## Known Issues / Blockers
 > Add anything that is blocking progress here.
 
-- **Approval status is not enforced at login.** `AuthController#login` and `authenticate_user!` never check `users.status`, so a `pending` or `rejected` staff/admin can still log in with their own credentials. Fix: reject login (and token use) unless `user.approved?`, and show a friendly message in `Login.jsx`.
 - **Default seed passwords in production.** Production was seeded with `db/seeds.rb`, whose passwords are public in the repo. Change the `superadmin` password (and staff/student demo passwords) on the live database.
 - **No `.env.example` files.** `server/.env` and `client/.env` are git-ignored, so a fresh clone fails to boot until they are created (see root README).
 - **Notifications are derived, not stored.** Students' "unread" is tracked in `localStorage` per browser; admin/staff bells show current to-do items.

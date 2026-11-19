@@ -155,15 +155,14 @@ PATCH  /api/v1/users/:id/reject    (admin)
 - React client: Login, Register, landing page, student views, admin dashboard, staff dashboard, assign/resolve modals, pending approvals page, global expired-JWT handling
 - Deployed: API on Render, client on Netlify (production DB seeded via the Render build command)
 
-**In review (PR into `staging`, branch `feature/navbar-notifications`)**
+**Merged (navbar + notifications, PR #1)**
 - `Navbar` (role-aware links, mobile menu, logout) rendered by `PrivateRoute`
 - `NotificationBell` — student status updates, admin unassigned complaints, staff open tasks (derived client-side from the complaints list; polls every 60s)
 - `ComplaintSerializer` now exposes `updated_at`
 - Per-page logout buttons removed (the navbar replaces them)
 
 **Next**
-- Test and merge the navbar/notifications PR, then promote `staging` → `main`
-- Enforce `status == approved` at login and in `authenticate_user!` (pending/rejected users can currently log in)
+- Verify the approval fix on the live site (register a staff account → login should say it is awaiting approval)
 - Change the production `superadmin` password (production was seeded with the default seed passwords)
 - Add `.env.example` files so a fresh clone is easy to run
 - Phase 2 features: email notifications on approval/assignment/resolution, comments thread, file attachments
@@ -182,7 +181,8 @@ PATCH  /api/v1/users/:id/reject    (admin)
 4. Student views → admin + staff views
 5. Integration, JWT expiry handling, registration, landing page
 6. Deployment (Render + Netlify), production.rb fixed for API mode, pending approvals page
-7. Navbar + notification bell (PR in review); docs refreshed
+7. Navbar + notification bell merged; docs refreshed
+8. Approval enforced at login/token check; login page demo creds → superadmin; failed login no longer shown as "session expired"
 
 ---
 

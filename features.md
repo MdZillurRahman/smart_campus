@@ -25,7 +25,7 @@ _Last updated: 2026-11-19. Phase 1 is complete and deployed. Phase 2 is partly d
 - [x] View all personal complaints with filters (status, category)
 - [x] Expand a complaint row to see full description + resolution info
 - [x] See resolution time chip (e.g. "2.3 days")
-- [~] Notification bell showing complaint status updates — in PR `feature/navbar-notifications`, pending merge
+- [x] Notification bell showing complaint status updates
 
 ### Admin
 - [x] View all complaints (all students) with stat cards
@@ -34,17 +34,17 @@ _Last updated: 2026-11-19. Phase 1 is complete and deployed. Phase 2 is partly d
 - [x] Resolve a complaint with a resolution note → status becomes "Resolved"
 - [x] Reopen a resolved complaint → status resets to "Submitted"
 - [x] Expand complaint rows to see full detail
-- [~] Notification bell for unassigned complaints — in PR `feature/navbar-notifications`, pending merge
+- [x] Notification bell for unassigned complaints
 
 ### Staff
 - [x] View only complaints assigned to them
 - [x] Filter by pending / resolved
 - [x] Resolve an assigned complaint with a resolution note
-- [~] Notification bell for newly assigned tasks — in PR `feature/navbar-notifications`, pending merge
+- [x] Notification bell for newly assigned tasks
 
 ### Shared UI
 - [x] Landing page (marketing, how it works, roles)
-- [~] Role-aware navbar (different links per role) — in PR `feature/navbar-notifications`, pending merge
+- [x] Role-aware navbar (different links per role)
 - [x] Status badges (Submitted / In Progress / Resolved)
 - [x] Priority badges (High / Medium / Low)
 - [x] Priority-coloured task cards for staff
@@ -66,7 +66,7 @@ _Last updated: 2026-11-19. Phase 1 is complete and deployed. Phase 2 is partly d
 - [x] Admin can view and approve pending staff registrations
 - [x] Superadmin can view and approve pending admin registrations
 - [~] Reject pending registrations (reject works; sending feedback to the user does not)
-- [ ] Block pending/rejected users from logging in (**known gap**, see implementation.md)
+- [x] Block pending/rejected users from logging in (login returns 403 with a message; tokens of non-approved users are refused)
 
 ### Notifications (Email)
 - [ ] Email sent to student when complaint is assigned

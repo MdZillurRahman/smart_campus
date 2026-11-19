@@ -153,7 +153,7 @@ Indexes: `student_id`, `assigned_to_id`, `status`
 
 > **Registration:** `POST /auth/register` creates the user with `status` set server-side: `approved` for students (a JWT is returned immediately), `pending` for staff and admin (no token). The client never sends `status`.
 >
-> **Known gap:** login does not yet check `status`, so a pending or rejected user can still log in. See implementation.md → Known Issues.
+> **Approval is enforced:** login returns `403` (with a message) for `pending`/`rejected` users after the password is verified, and `authenticate_user!` returns `401` for any non-approved user's token.
 >
 > **Response shape:** complaint and user endpoints return JSON:API documents (`{ data: [{ id, attributes }] }`). The React hooks normalize them to `{ id, ...attributes }`.
 
