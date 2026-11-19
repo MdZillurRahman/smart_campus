@@ -6,6 +6,11 @@ class ApplicationController < ActionController::API
     token   = request.headers["Authorization"]&.split(" ")&.last
     payload = JWT.decode(token, SECRET, true, algorithm: "HS256").first
     @current_user = User.find(payload["user_id"])
+
+    # A user who is (or becomes) non-approved cannot use an existing token.
+    unless @current_user.approved?
+      render json: { error: "Unauthorized" }, status: :unauthorized
+    end
   rescue JWT::DecodeError, JWT::ExpiredSignature, ActiveRecord::RecordNotFound
     render json: { error: "Unauthorized" }, status: :unauthorized
   end
