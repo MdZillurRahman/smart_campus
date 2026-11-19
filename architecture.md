@@ -259,6 +259,9 @@ Production notes:
 
 ## Complaint Status Lifecycle
 
+> Enforced server-side: `assign` is rejected for Resolved complaints and only accepts approved staff; `resolve` needs a non-blank `resolution_note` and cannot be repeated; `reopen` only works on Resolved complaints.
+
+
 ```
 [Submitted] ──(admin assigns)──► [In Progress] ──(admin or staff resolves)──► [Resolved]
      ▲                                                                               │

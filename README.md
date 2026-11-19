@@ -22,7 +22,11 @@ A full-stack campus complaint management system built with React, Ruby on Rails,
 
 Prerequisites: Ruby 3.2.10, Node, and PostgreSQL running locally.
 
-**1. Environment files** (both are git-ignored, so create them yourself)
+**1. Environment files** (git-ignored; copy the examples and edit)
+```bash
+cp server/.env.example server/.env
+cp client/.env.example client/.env
+```
 
 `server/.env`
 ```
