@@ -16,7 +16,7 @@ The React frontend and Rails backend are **completely separate applications** th
 | HTTP Client| Axios                               | latest   | —           |
 | State      | React Query (TanStack)              | v5       | —           |
 | Forms      | React Hook Form + Zod               | latest   | —           |
-| Routing    | React Router v6                     | v6       | —           |
+| Routing    | React Router                        | v7       | —           |
 | Backend    | Ruby on Rails (API mode)            | 8.1.2    | Render      |
 | Auth       | JWT (via `jwt` gem + bcrypt)        | —        | —           |
 | Database   | PostgreSQL                          | 16       | Render      |
