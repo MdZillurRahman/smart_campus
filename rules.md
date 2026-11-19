@@ -162,7 +162,7 @@ docs: update architecture with database schema
 5. **Staff can only resolve their own assigned complaints.** Check `assigned_to_id == current_user.id` server-side.
 6. **`users.status` is always set server-side.** Registration never permits `status`: students start `approved`, staff/admin start `pending`. Only `approve`/`reject` change it. Login and token checks require `approved` (`AuthController#login`, `authenticate_user!`).
 7. **Change seeded passwords on any deployed database.** The seed passwords are public in this repo.
-8. **Sensitive data never goes in git.** Use `.env` files locally, Render/Netlify environment variables in production. Both `.env` files are in `.gitignore`.
+8. **Sensitive data never goes in git.** Use `.env` files locally, Render/Netlify environment variables in production. Both `.env` files are in `.gitignore`; keep `server/.env.example` and `client/.env.example` (committed, no real secrets) in sync with the variables the app reads.
 
 ---
 

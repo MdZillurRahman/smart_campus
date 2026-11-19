@@ -163,8 +163,8 @@ PATCH  /api/v1/users/:id/reject    (admin)
 
 **Next**
 - Verify the approval fix on the live site (register a staff account → login should say it is awaiting approval)
-- Change the production `superadmin` password (production was seeded with the default seed passwords)
-- Add `.env.example` files so a fresh clone is easy to run
+- Demo credentials stay public on purpose (customers test with them); avoid real data on the live site
+- Optional: login rate limiting, CI (lint + build), automated tests, route-level code splitting
 - Phase 2 features: email notifications on approval/assignment/resolution, comments thread, file attachments
 - Phase 3 features: search, pagination, analytics
 
@@ -182,7 +182,8 @@ PATCH  /api/v1/users/:id/reject    (admin)
 5. Integration, JWT expiry handling, registration, landing page
 6. Deployment (Render + Netlify), production.rb fixed for API mode, pending approvals page
 7. Navbar + notification bell merged; docs refreshed
-8. Approval enforced at login/token check; login page demo creds → superadmin; failed login no longer shown as "session expired"
+8. Hardening: complaint state rules enforced server-side, server-side password length, `.env.example`, lint clean, wrong-role redirect
+9. Approval enforced at login/token check; login page demo creds → superadmin; failed login no longer shown as "session expired"
 
 ---
 

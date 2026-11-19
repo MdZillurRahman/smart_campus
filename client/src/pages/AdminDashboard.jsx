@@ -13,7 +13,6 @@ import {
   LayoutDashboard, Inbox, Clock, CheckCircle2,
   Filter, UserPlus, RotateCcw, CheckCheck, Search,
 } from 'lucide-react';
-import { Link } from 'react-router-dom'
 import StatusBadge from '../components/StatusBadge'
 import PriorityBadge from '../components/PriorityBadge'
 import AssignModal from '../components/AssignModal'
@@ -85,13 +84,6 @@ export default function AdminDashboard() {
               <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
               <p className="text-slate-500 text-sm">Welcome back, {user.fullname}</p>
             </div>
-          </div>
-          <div className="flex gap-2">
-            <Link to="/admin/approvals">
-              <Button size="sm" variant="outline">
-                Pending Approvals
-              </Button>
-            </Link>
           </div>
         </div>
 

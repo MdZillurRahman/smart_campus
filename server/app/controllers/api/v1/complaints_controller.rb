@@ -44,9 +44,15 @@ class Api::V1::ComplaintsController < ApplicationController
     return if performed?
 
     complaint = Complaint.find(params[:id])
+
+    if complaint.status == "Resolved"
+      return render json: { error: "Reopen this complaint before assigning it" },
+                    status: :unprocessable_entity
+    end
+
     staff = User.find_by(id: params[:assigned_to_id])
 
-    unless staff&.staff?
+    unless staff&.staff? && staff.approved?
       return render json: { error: "Invalid staff member" },
                     status: :unprocessable_entity
     end
@@ -70,6 +76,16 @@ class Api::V1::ComplaintsController < ApplicationController
                     status: :forbidden
     end
 
+    if complaint.status == "Resolved"
+      return render json: { error: "This complaint is already resolved" },
+                    status: :unprocessable_entity
+    end
+
+    if params[:resolution_note].to_s.strip.empty?
+      return render json: { error: "A resolution note is required" },
+                    status: :unprocessable_entity
+    end
+
     if complaint.update(
       status: "Resolved",
       resolution_note: params[:resolution_note],
@@ -87,6 +103,11 @@ class Api::V1::ComplaintsController < ApplicationController
     return if performed?
 
     complaint = Complaint.find(params[:id])
+
+    unless complaint.status == "Resolved"
+      return render json: { error: "Only resolved complaints can be reopened" },
+                    status: :unprocessable_entity
+    end
 
     if complaint.update(
       status: "Submitted",
