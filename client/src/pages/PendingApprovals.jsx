@@ -68,30 +68,29 @@ export default function PendingApprovals() {
             Back to dashboard
           </Link>
 
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div className="flex items-start gap-3">
-              <div className="hidden sm:flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/20">
                 <UserCheck className="h-6 w-6" />
               </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-                  Pending Approvals
-                </h1>
-                <p className="text-slate-500 text-sm mt-1">
-                  {isSuperadmin
-                    ? 'Review pending staff and admin registrations'
-                    : 'Review pending staff registrations'}
-                </p>
-              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+                Pending Approvals
+              </h1>
             </div>
 
             {!isLoading && !isError && (
-              <span className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 ring-1 ring-amber-200">
+              <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-medium text-amber-700 ring-1 ring-amber-200">
                 <Clock className="h-3.5 w-3.5" />
                 {visible.length} pending
               </span>
             )}
           </div>
+
+          <p className="text-slate-500 text-sm">
+            {isSuperadmin
+              ? 'Review pending staff and admin registrations'
+              : 'Review pending staff registrations'}
+          </p>
         </div>
 
         {/* Loading */}

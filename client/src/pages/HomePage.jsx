@@ -115,7 +115,7 @@ export default function HomePage() {
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               Built for universities
             </span>
-            <h1 className="mt-5 text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
+            <h1 className="mt-5 text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
               Campus issues, <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">solved faster.</span>
             </h1>
             <p className="mt-5 text-lg text-slate-600 sm:text-xl">
